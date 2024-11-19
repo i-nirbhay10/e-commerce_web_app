@@ -51,7 +51,7 @@ function LoginForm() {
         <p className="mt-4 text-center text-sm text-gray-500">
           Don't have an account?{" "}
           <a
-            href="/register"
+            href="/auth/register"
             className="text-blue-500 font-semibold hover:underline"
           >
             Register now

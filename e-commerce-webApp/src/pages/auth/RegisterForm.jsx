@@ -36,7 +36,7 @@ function RegisterForm() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter your name"
-        label="Name"
+        label="User Name"
         required
       />
       <Input
@@ -74,7 +74,10 @@ function RegisterForm() {
       </button>
       <p className="mt-4 text-center text-sm text-gray-500">
         Already have an account?
-        <a href="/" className="text-blue-500 font-semibold hover:underline">
+        <a
+          href="/auth/login"
+          className="text-blue-500 font-semibold hover:underline"
+        >
           Log in
         </a>
       </p>
