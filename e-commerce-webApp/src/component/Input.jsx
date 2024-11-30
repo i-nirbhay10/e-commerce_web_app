@@ -1,6 +1,15 @@
 import React from "react";
 
-function Input({ type, id, value, onChange, placeholder, label, required }) {
+function Input({
+  type,
+  id,
+  value,
+  onChange,
+  placeholder,
+  label,
+  required,
+  name,
+}) {
   return (
     <div className="mb-4">
       <label
@@ -12,6 +21,7 @@ function Input({ type, id, value, onChange, placeholder, label, required }) {
       <input
         type={type}
         id={id}
+        name={name}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

@@ -1,16 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../../component/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logdinuser } from "../../store/SliceReduser";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const isAuthenticated = useSelector((state) => state);
+
+  const [formdata, setformdata] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Add login logic here
+    console.log(formdata);
+    dispatch(logdinuser(formdata));
   };
+
+  const hendelInputchange = (e) => {
+    setformdata({
+      ...formdata,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log(isAuthenticated);
+  //     console.log("User is authenticated:", isAuthenticated);
+  //     navigate("/user/home");
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   return (
     <div className="flex items-center justify-center ">
@@ -26,18 +49,18 @@ function LoginForm() {
         </p>
         <Input
           type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={formdata.email}
+          onChange={hendelInputchange}
           placeholder="Enter your email"
           label="Email"
           required
         />
         <Input
           type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={formdata.password}
+          onChange={hendelInputchange}
           placeholder="Enter your password"
           label="Password"
           required

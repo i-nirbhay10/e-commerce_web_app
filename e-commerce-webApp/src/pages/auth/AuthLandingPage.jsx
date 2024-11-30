@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-function AuthPage() {
+function AuthLandingPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => {
@@ -38,4 +38,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default AuthLandingPage;

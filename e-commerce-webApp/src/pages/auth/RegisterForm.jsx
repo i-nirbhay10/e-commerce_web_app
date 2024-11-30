@@ -1,22 +1,42 @@
 import React, { useState } from "react";
 import Input from "../../component/Input";
+import { createUser } from "../../store/SliceReduser";
+import { useDispatch } from "react-redux";
 
 function RegisterForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const [formdata, setformdata] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+
+    console.log(formdata);
+
+    const response = await dispatch(createUser(formdata));
+    if (response) {
+      setformdata({
+        name: "",
+        email: "",
+        password: "",
+        confirmpassword: "",
+      });
     }
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Add registration logic here
+    console.log("response.data", response.payload);
+  };
+
+  const hendelInputchange = (e) => {
+    console.log(e.target.name);
+
+    setformdata({
+      ...formdata,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -32,36 +52,36 @@ function RegisterForm() {
       </p>
       <Input
         type="text"
-        id="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        name="name"
+        value={formdata.name}
+        onChange={hendelInputchange}
         placeholder="Enter your name"
         label="User Name"
         required
       />
       <Input
         type="email"
-        id="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        name="email"
+        value={formdata.email}
+        onChange={hendelInputchange}
         placeholder="Enter your email"
         label="Email"
         required
       />
       <Input
         type="password"
-        id="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        name="password"
+        value={formdata.password}
+        onChange={hendelInputchange}
         placeholder="Enter your password"
         label="Password"
         required
       />
       <Input
         type="password"
-        id="confirmPassword"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
+        name="confirmpassword"
+        value={formdata.confirmpassword}
+        onChange={hendelInputchange}
         placeholder="Confirm your password"
         label="Confirm Password"
         required

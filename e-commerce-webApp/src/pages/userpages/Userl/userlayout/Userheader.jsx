@@ -1,4 +1,5 @@
 import React from "react";
+import DigitalClock from "../../../../component/DigitalClock";
 
 function Userheader() {
   return (
@@ -8,7 +9,7 @@ function Userheader() {
         <div className="text-2xl font-bold text-blue-600">
           <a href="/">E-ShopWilla</a>
         </div>
-
+        <DigitalClock />
         {/* Search Bar */}
         <div className="hidden lg:flex flex-1 mx-4">
           <input
